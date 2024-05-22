@@ -70,6 +70,10 @@ pub union Vector {
 #[doc(hidden)]
 #[link_section = ".vector_table.interrupts"]
 #[no_mangle]
+#[cfg(target_os = "macos")]
+#[link_section = "__DATA,.vector_table.interrupts"]
+static __INTERRUPTS: [u32; 48] = [0; 48];
+
 pub static __INTERRUPTS: [Vector; 32] = [
     Vector {
         _handler: TIMER_IRQ_0,
